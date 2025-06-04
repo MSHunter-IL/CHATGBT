@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Search Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-4 text-center text-purple-700">Dynamic Search Portal</h1>
+        <div class="flex flex-col sm:flex-row gap-2 mb-4">
+            <input id="searchInput" type="text" class="flex-1 p-2 border rounded" placeholder="Enter search term"/>
+            <button id="searchBtn" class="px-4 py-2 bg-blue-500 text-white rounded">Search</button>
+        </div>
+        <div id="messageArea" class="mb-4 text-red-600"></div>
+        <div id="loader" class="hidden text-center mb-4">Loading...</div>
+        <div id="searchResults" class="grid gap-4 mb-4"></div>
+        <div id="actions" class="flex flex-wrap gap-2 mb-4"></div>
+        <button id="summaryBtn" class="px-4 py-2 bg-green-500 text-white rounded hidden">✨ Summarize Results</button>
+    </div>
+
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-4 rounded w-11/12 md:w-1/2">
+            <h2 id="modalTitle" class="text-xl font-bold mb-2"></h2>
+            <div id="modalContent" class="mb-4"></div>
+            <button id="modalClose" class="px-4 py-2 bg-gray-700 text-white rounded">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
