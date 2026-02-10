@@ -1,33 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Search Portal</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Loop Clicker</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #1d1238, #0e0b1e 65%);
+      color: #f6f1ff;
+    }
+    .app {
+      max-width: 940px;
+      margin: 24px auto;
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    h1, h2, h3 { margin: 0 0 8px; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #140d28;
+      background: linear-gradient(90deg, #7ff2ff, #ffe27a);
+    }
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .primary {
+      font-size: 18px;
+      padding: 14px 18px;
+    }
+    .stat {
+      min-width: 120px;
+      padding: 7px 10px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .bar {
+      width: 100%;
+      height: 16px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .fill {
+      height: 100%;
+      width: 0;
+      transition: width 0.22s ease;
+      background: linear-gradient(90deg, #67f3ff, #b589ff);
+    }
+    .log {
+      min-height: 54px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      color: #fff6b3;
+    }
+    .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .muted { opacity: 0.82; font-size: 14px; }
+  </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold mb-4 text-center text-purple-700">Dynamic Search Portal</h1>
-        <div class="flex flex-col sm:flex-row gap-2 mb-4">
-            <input id="searchInput" type="text" class="flex-1 p-2 border rounded" placeholder="Enter search term"/>
-            <button id="searchBtn" class="px-4 py-2 bg-blue-500 text-white rounded">Search</button>
-        </div>
-        <div id="messageArea" class="mb-4 text-red-600"></div>
-        <div id="loader" class="hidden text-center mb-4">Loading...</div>
-        <div id="searchResults" class="grid gap-4 mb-4"></div>
-        <div id="actions" class="flex flex-wrap gap-2 mb-4"></div>
-        <button id="summaryBtn" class="px-4 py-2 bg-green-500 text-white rounded hidden">✨ Summarize Results</button>
-    </div>
+<body>
+  <main class="app">
+    <section class="card">
+      <h1>⚡ Neon Loop Clicker</h1>
+      <p class="muted">Action → Reward → Upgrade → Stronger Action → Repeat</p>
+      <div class="row" style="margin-top:10px;">
+        <button id="actionBtn" class="primary">Harvest Spark</button>
+        <button id="prestigeBtn">Prestige Reset</button>
+      </div>
+      <div id="actionLog" class="log" style="margin-top:10px;">Ready for first harvest!</div>
+    </section>
 
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-white p-4 rounded w-11/12 md:w-1/2">
-            <h2 id="modalTitle" class="text-xl font-bold mb-2"></h2>
-            <div id="modalContent" class="mb-4"></div>
-            <button id="modalClose" class="px-4 py-2 bg-gray-700 text-white rounded">Close</button>
-        </div>
-    </div>
+    <section class="card">
+      <h2>Progression</h2>
+      <div class="row">
+        <div class="stat">Spark: <strong id="sparkValue">0</strong></div>
+        <div class="stat">Level: <strong id="levelValue">1</strong></div>
+        <div class="stat">XP: <strong id="xpValue">0</strong></div>
+        <div class="stat">Shards: <strong id="shardValue">0</strong></div>
+        <div class="stat">Prestige: <strong id="prestigeValue">0</strong></div>
+      </div>
+      <p class="muted" id="xpLabel">XP to next level: 20</p>
+      <div class="bar"><div id="xpFill" class="fill"></div></div>
+    </section>
 
-    <script src="script.js"></script>
+    <section class="card">
+      <h2>Upgrades</h2>
+      <div id="upgrades" class="grid"></div>
+    </section>
+
+    <section class="card">
+      <h2>Missions</h2>
+      <div id="missions" class="grid"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
